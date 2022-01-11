@@ -72,16 +72,54 @@ describe('Calculator', () => {
     expect(runningTotal.text()).toEqual('3');
   });
 
-  xit('should number click', () => {
-    const numberClick = container.find('#numberClick'); 
+  it('should concatenate multiple number button clicks', () => {
+     const button3 = container.find('#number3');
+     const button5 = container.find('#number5');
+     const button8 = container.find('#number8');
+     const runningTotal = container.find('#running-total');
+     button3.simulate('click');
+     button5.simulate('click');
+     button8.simulate('click');
+     expect(runningTotal.text()).toEqual('358');
   });
 
-  xit('should have operator click', () => {
-    const operatorClick = container.find('#operatorClick');
+  it('should chain multiple operations together', () => {
+    const button2 = container.find('#number2');
+    const button7 = container.find('#number7');
+    const button5 = container.find('#number5');
+    const button3 = container.find('#number3');
+    const buttonPlus = container.find('#operator_add');
+    const buttonTimes = container.find('#operator-multiply');
+    const buttonMinus = container.find('#operator-subtract');
+    const buttonEquals = container.find('#operator-equals');
+    const runningTotal = container.find('#running-total');
+    button3.simulate('click');
+    buttonTimes.simulate('click');
+    button7.simulate('click');
+    buttonPlus.simulate('click');
+    button5.simulate('click');
+    buttonMinus.simulate('click');
+    button2.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('24');
   });
 
-  xit('should have clear click', () => {
-    const clearClick = container.find('#clearClick');
+  it('should clear running total without affecting the calculation', () => {
+    const button4 = container.find('#number4');
+    const button3 = container.find('#number3');
+    const buttonPlus = container.find('#operator_add');
+    const buttonTimes = container.find('#operator-multiply');
+    const runningTotal = container.find('#running-total');
+    const buttonClear = container.find('#clear');
+    const buttonEquals = container.find('#operator-equals');
+    button4.simulate('click');
+    buttonTimes.simulate('click');
+    button4.simulate('click');
+    buttonPlus.simulate('click');
+    button3.simulate('click');
+    buttonClear.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('16')
   });
 
 })
